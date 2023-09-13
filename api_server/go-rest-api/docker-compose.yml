@@ -1,0 +1,61 @@
+version: "3"
+services:
+  dev-postgres:
+    image: postgres:latest
+    container_name: postgresql
+    ports:
+      - "5434:5432"
+    # volumes:
+    #   - ./postgres/init:/docker-entrypoint-initdb.d
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    networks:
+      - lesson
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin4_container
+    volumes:
+      - ./pgadmin:/var/lib/pgadmin/storage
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80"
+    networks:
+      - lesson
+  go-rest-api:
+    depends_on:
+      - dev-postgres
+    image: golang:latest
+    # build: .
+    container_name: go-rest-api
+    volumes:
+      - type: bind
+        source: "./"
+        target: "/go/src/app/go-rest-api"
+    working_dir: /go/src/app/go-rest-api
+    ports:
+      - "3000:80"
+    restart: always
+    # environment:
+    #   PORT: 8080
+    #   POSTGRES_USER: postgres
+    #   POSTGRES_PASSWORD: postgres
+    #   POSTGRES_DB: postgres
+    #   POSTGRES_PORT: 5434
+    #   POSTGRES_HOST: localhost
+    #   SECRET: uu5pveql
+    #   GO_ENV: dev
+    #   API_DOMAIN: localhost
+    #   FE_URL: http://localhost:3000
+    networks:
+      - lesson
+    tty: true          #-t ttyを割り当てます。
+    stdin_open: true   #-i STDINを開きます。
+
+networks:
+    lesson:
