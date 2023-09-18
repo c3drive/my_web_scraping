@@ -31,5 +31,9 @@ go mod tidy
 ```
 migrate
 ```
-go run migrate/migrate.go
+GO_ENV=dev go run migrate/migrate.go
+```
+web server
+```
+GO_ENV=dev go run main.go
 ```

@@ -39,7 +39,7 @@ services:
         target: "/go/src/app/go-rest-api"
     working_dir: /go/src/app/go-rest-api
     ports:
-      - "3000:80"
+      - "8080:8080"
     restart: always
     # environment:
     #   PORT: 8080
@@ -56,6 +56,15 @@ services:
       - lesson
     tty: true          #-t ttyを割り当てます。
     stdin_open: true   #-i STDINを開きます。
-
+  newman:
+    #image: postman/newman
+    build: ~/work/docker/my_tools/newman/.
+    container_name: newman
+    volumes:
+     - ~/work/docker/my_tools/newman:/etc/newman
+    networks:
+      - lesson
+    tty: true          #-t ttyを割り当てます。
+    stdin_open: true   #-i STDINを開きます。
 networks:
     lesson:
