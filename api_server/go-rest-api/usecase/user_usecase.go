@@ -4,10 +4,10 @@ import (
 	"go-rest-api/model"
 	"go-rest-api/repository"
 	//"go-rest-api/validator"
-	//"os"
-	//"time"
+	"os"
+	"time"
 
-	//"github.com/golang-jwt/jwt/v4"
+	"github.com/golang-jwt/jwt/v4"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -48,9 +48,9 @@ func (uu *userUsecase) SignUp(user model.User) (model.UserResponse, error) {
 }
 
 func (uu *userUsecase) Login(user model.User) (string, error) {
-	if err := uu.uv.UserValidate(user); err != nil {
-		return "", err
-	}
+	// if err := uu.uv.UserValidate(user); err != nil {
+	// 	return "", err
+	// }
 	storedUser := model.User{}
 	if err := uu.ur.GetUserByEmail(&storedUser, user.Email); err != nil {
 		return "", err
