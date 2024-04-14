@@ -18,7 +18,7 @@ services:
     image: dpage/pgadmin4
     container_name: pgadmin4_container
     volumes:
-      - ./pgadmin:/var/lib/pgadmin/storage
+      - ./api_server/pgadmin:/var/lib/pgadmin/storage
     restart: always
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
@@ -35,7 +35,7 @@ services:
     container_name: go-rest-api
     volumes:
       - type: bind
-        source: "./"
+        source: "./api_server/"
         target: "/go/src/app/go-rest-api"
     working_dir: /go/src/app/go-rest-api
     ports:
@@ -62,6 +62,21 @@ services:
     container_name: newman
     volumes:
      - ~/work/docker/my_tools/newman:/etc/newman
+    networks:
+      - lesson
+    tty: true          #-t ttyを割り当てます。
+    stdin_open: true   #-i STDINを開きます。
+  go-rest-web:
+    build: ./web_server/.
+    container_name: go-rest-web
+    volumes:
+      - type: bind
+        source: "./web_server"
+        target: "/go/src/app/go-rest-web"
+    working_dir: /go/src/app/go-rest-web
+    ports:
+      - "3000:3000"
+    restart: always
     networks:
       - lesson
     tty: true          #-t ttyを割り当てます。
