@@ -21,16 +21,16 @@ cssを書き換える
 @tailwind utilities;
 ```
 
-## 2回目以降。
+# 2回目以降
 必要なファイルがある状態で新たに環境構築します。
 コンテナを起動
 ```
 docker-compose up -d
 ```
 開発
-goコマンドが必要な場合。コンテナ内に入る
+コンテナ内に入る
 ```
-docker exec -it go-rest-api /bin/bash
+docker exec -it go-rest-web /bin/bash
 ```
 
 web server
