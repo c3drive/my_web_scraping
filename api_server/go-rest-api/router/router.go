@@ -3,8 +3,6 @@ package router
 import (
 	"go-rest-api/controller"
 	"net/http"
-
-	//"net/http"
 	"os"
 
 	echojwt "github.com/labstack/echo-jwt/v4"
