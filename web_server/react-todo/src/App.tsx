@@ -11,9 +11,8 @@ function App() {
     const getCsrfToken = async () => {
       const { data } = await axios.get<CsrfToken>(
        `${process.env.REACT_APP_API_URL}/csrf`
-        //`http://localhost:8080/csrf`
       )
-      axios.defaults.headers.common['X-CSRF-Token'] = data.csrf_token
+      axios.defaults.headers.common['X-CSRF-TOKEN'] = data.csrf_token
     }
     getCsrfToken()
   }, [])

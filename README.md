@@ -55,7 +55,7 @@ docker exec newman newman run "collections/udemy-put-tasks-id-collection.json" -
 ```
 docker exec newman newman run "collections/udemy-delete-tasks-id-collection.json" -e "environments/udemy-echo-dev-environment.json" 
 ```
-1. PostManでget csrf/Login/を確認する
+1. PostManでget csrf/Login/を確認する（これは機能しない）
 ```
 １、Cookie(Jar)とBodyを取得する
 docker exec newman newman run "collections/udemy-get-csrf-post-login-collection.json" -e "environments/udemy-echo-dev-environment.json" --folder "Get CSRF" --export-cookie-jar cookies/csrf.jar -r csv --reporter-csv-includeBody

@@ -22,5 +22,5 @@
   },
   "include": [
     "src"
-, "src/components/.TaskItem.tsx"  ]
+, "src/components/TaskItem.tsx"  ]
 }
